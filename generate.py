@@ -1,33 +1,19 @@
-from random import randint
+import csv
+import Student
 
-firstName = []
-lastName = []
-fullName =[]
-
-
-#The below code will just pull first and and last name files into an array
-
-with open('firstNames','r') as f:
-    for line in f:
-        for word in line.split():
-           print(word)      
-           firstName.append(word)
-
-with open('lastNames','r') as f:
-    for line in f:
-        for word in line.split():
-           print(word)
-           lastName.append(word)      
-
-for i in range(1000):
-	n = randint(1,len(lastName))
-	n-=1
-	m = randint(1,len(firstName))
-	m-=1
-
-#There will be five arrays, name, id, comlusory, alternate
-
-	print "%s %s" %(firstName[m], lastName[n])
-	fullName.append("%s %s" %(firstName[m], lastName[n]))
+studentList = []
 
 
+data = 'data.csv'
+
+with open(data, 'rb') as f:
+    try:
+    reader = csv.reader(f)
+        for row in reader:
+        	studentList.append(row)
+    except csv.Error as e:
+        sys.exit('file %s, line %d: %s' % (filename, reader.line_num, e))
+
+for i in studentList:
+	Student(i)
+	
